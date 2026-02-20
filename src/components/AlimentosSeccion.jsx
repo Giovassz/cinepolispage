@@ -37,6 +37,7 @@ const menus = [
 
 function AlimentosSeccion() {
   const [mockScreen, setMockScreen] = useState(null);
+  const [alimentosSeleccionados, setAlimentosSeleccionados] = useState([]);
 
   const handleMenuClick = (menu) => {
     setMockScreen(menu);
@@ -44,49 +45,94 @@ function AlimentosSeccion() {
 
   const closeMock = () => setMockScreen(null);
 
+  const toggleAlimento = (categoria, itemId) => {
+    const key = `${categoria}-${itemId}`;
+    setAlimentosSeleccionados(prev => {
+      if (prev.includes(key)) {
+        return prev.filter(id => id !== key);
+      } else {
+        return [...prev, key];
+      }
+    });
+  };
+
+  const getAlimentoKey = (categoria, itemId) => `${categoria}-${itemId}`;
+
   return (
     <>
       <section id="alimentos" className="section-alimentos promos-alimentos">
         <h2 className="section-title">Alimentos</h2>
 
+        {alimentosSeleccionados.length > 0 && (
+          <div className="alimentos-seleccionados-info">
+            <p>Alimentos seleccionados: <strong>{alimentosSeleccionados.length}</strong></p>
+          </div>
+        )}
         <div className="alimentos-categorias">
           <h3 className="alimentos-categoria-title">Bebidas</h3>
           <div className="alimentos-categorias-grid">
-            {categoriasAlimentos.bebidas.map((item) => (
-              <div key={`b-${item.id}`} className="alimento-item">
-                {item.imageUrl && (
-                  <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
-                )}
-                <p className="alimento-item-name">{item.name}</p>
-                <p className="alimento-item-detail">{item.detail}</p>
-              </div>
-            ))}
+            {categoriasAlimentos.bebidas.map((item) => {
+              const key = getAlimentoKey('bebidas', item.id);
+              const isSelected = alimentosSeleccionados.includes(key);
+              return (
+                <div 
+                  key={`b-${item.id}`} 
+                  className={`alimento-item ${isSelected ? 'alimento-seleccionado' : ''}`}
+                  onClick={() => toggleAlimento('bebidas', item.id)}
+                >
+                  {item.imageUrl && (
+                    <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
+                  )}
+                  <p className="alimento-item-name">{item.name}</p>
+                  <p className="alimento-item-detail">{item.detail}</p>
+                  {isSelected && <span className="alimento-check">✓</span>}
+                </div>
+              );
+            })}
           </div>
 
           <h3 className="alimentos-categoria-title">Comestibles</h3>
           <div className="alimentos-categorias-grid">
-            {categoriasAlimentos.comestibles.map((item) => (
-              <div key={`c-${item.id}`} className="alimento-item">
-                {item.imageUrl && (
-                  <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
-                )}
-                <p className="alimento-item-name">{item.name}</p>
-                <p className="alimento-item-detail">{item.detail}</p>
-              </div>
-            ))}
+            {categoriasAlimentos.comestibles.map((item) => {
+              const key = getAlimentoKey('comestibles', item.id);
+              const isSelected = alimentosSeleccionados.includes(key);
+              return (
+                <div 
+                  key={`c-${item.id}`} 
+                  className={`alimento-item ${isSelected ? 'alimento-seleccionado' : ''}`}
+                  onClick={() => toggleAlimento('comestibles', item.id)}
+                >
+                  {item.imageUrl && (
+                    <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
+                  )}
+                  <p className="alimento-item-name">{item.name}</p>
+                  <p className="alimento-item-detail">{item.detail}</p>
+                  {isSelected && <span className="alimento-check">✓</span>}
+                </div>
+              );
+            })}
           </div>
 
           <h3 className="alimentos-categoria-title">Snacks y dulces</h3>
           <div className="alimentos-categorias-grid">
-            {categoriasAlimentos.snacks.map((item) => (
-              <div key={`s-${item.id}`} className="alimento-item">
-                {item.imageUrl && (
-                  <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
-                )}
-                <p className="alimento-item-name">{item.name}</p>
-                <p className="alimento-item-detail">{item.detail}</p>
-              </div>
-            ))}
+            {categoriasAlimentos.snacks.map((item) => {
+              const key = getAlimentoKey('snacks', item.id);
+              const isSelected = alimentosSeleccionados.includes(key);
+              return (
+                <div 
+                  key={`s-${item.id}`} 
+                  className={`alimento-item ${isSelected ? 'alimento-seleccionado' : ''}`}
+                  onClick={() => toggleAlimento('snacks', item.id)}
+                >
+                  {item.imageUrl && (
+                    <div className="alimento-item-img" style={{ backgroundImage: `url(${item.imageUrl})` }} />
+                  )}
+                  <p className="alimento-item-name">{item.name}</p>
+                  <p className="alimento-item-detail">{item.detail}</p>
+                  {isSelected && <span className="alimento-check">✓</span>}
+                </div>
+              );
+            })}
           </div>
         </div>
 

@@ -453,6 +453,12 @@ a {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s;
+}
+
+.movie-card-cinepolis.movie-selected {
+  border: 2px solid #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .movie-poster {
@@ -1262,4 +1268,374 @@ a {
   color: #6b7280;
   line-height: 1.45;
   padding: 0 1.5rem 1.5rem;
+}
+
+/* ========== ACCIONES RÁPIDAS ========== */
+.acciones-rapidas {
+  max-width: 1400px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contador-seleccionadas {
+  padding: 0.5rem 1rem;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ========== FAVORITOS ========== */
+.favoritos-section {
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.favoritos-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0d2137;
+  margin-bottom: 1rem;
+}
+
+.favoritos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.favorito-badge {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ========== MOVIE CARD MEJORAS ========== */
+.movie-poster {
+  position: relative;
+}
+
+.movie-favorite-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.movie-favorite-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.movie-favorite-btn.is-favorite {
+  color: #ef4444;
+}
+
+.movie-favorite-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.movie-description {
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.movie-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.movie-actions .btn-cinepolis {
+  margin: 0;
+  width: 100%;
+}
+
+.btn-seleccionar {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-seleccionar:hover {
+  background: #f3f4f6;
+  border-color: #2563eb;
+}
+
+.btn-seleccionar.seleccionado {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* ========== FORMULARIO DE COMPRA ========== */
+.compra-boletos-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-compra {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #0d2137;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-actions .btn-cinepolis {
+  flex: 1;
+}
+
+.compra-resumen {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border: 1px solid #bae6fd;
+}
+
+.compra-resumen h3 {
+  margin: 0 0 1rem;
+  color: #0d2137;
+  font-size: 1.25rem;
+}
+
+.compra-resumen p {
+  margin: 0.5rem 0;
+  color: #1e40af;
+}
+
+/* ========== CONFIRMACIÓN DE COMPRA ========== */
+.confirmacion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.confirmacion-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.confirmacion-modal h2 {
+  margin: 0 0 1.5rem;
+  color: #0d2137;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.confirmacion-content {
+  margin-bottom: 2rem;
+}
+
+.confirmacion-content p {
+  margin: 0.75rem 0;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.confirmacion-modal .btn-cinepolis {
+  width: 100%;
+}
+
+/* ========== PROMOCIONES DINÁMICAS ========== */
+.promociones-dinamicas {
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.promociones-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d2137;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.promociones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.promocion-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.promocion-card h4 {
+  margin: 0 0 0.75rem;
+  color: #0d2137;
+  font-size: 1.1rem;
+}
+
+.promocion-card p {
+  margin: 0 0 0.75rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.promocion-fecha {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  background: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+}
+
+.horarios-section {
+  padding: 2rem 1.5rem;
+}
+
+.horarios-placeholder {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* ========== SELECCIÓN DE ALIMENTOS ========== */
+.alimentos-seleccionados-info {
+  max-width: 1200px;
+  margin: 0 auto 1.5rem;
+  padding: 1rem;
+  background: #dbeafe;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.alimento-item {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.alimento-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alimento-item.alimento-seleccionado {
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+}
+
+.alimento-check {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #2563eb;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+/* Responsive para formulario */
+@media (max-width: 768px) {
+  .compra-boletos-section {
+    margin: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .promociones-grid {
+    grid-template-columns: 1fr;
+  }
 }
