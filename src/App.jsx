@@ -8,33 +8,42 @@ import Footer from './components/Footer.jsx';
 import Button from './components/Button.jsx';
 import IconLocation from './components/IconLocation.jsx';
 
-const peliculas = [
-  { id: 1, title: 'El Día Del Fin Del Mundo: Migración', genre: 'Ciencia ficción', year: 2024, rating: 'B', duration: '98 min', tag: 'Estreno', imageUrl: '/images/posters/ps1.jpg', description: 'Una épica aventura sobre la migración masiva de animales que deben encontrar un nuevo hogar mientras enfrentan peligros inimaginables en su viaje.' },
-  { id: 2, title: '¡Ayuda!', genre: 'Comedia', year: 2024, rating: 'B15', duration: '113 min', tag: 'En Cartelera', imageUrl: '/images/posters/ps2.jpg', description: 'Una comedia hilarante sobre un grupo de amigos que se encuentran en situaciones cada vez más absurdas mientras intentan ayudar a un compañero en apuros.' },
-  { id: 3, title: 'Aún Es De Noche En Caracas', genre: 'Drama', year: 2024, rating: 'B15', duration: '96 min', tag: 'En Cartelera', imageUrl: '/images/posters/ps3.jpg', description: 'Un conmovedor drama que explora la vida nocturna en Caracas, mostrando las historias de personas que buscan esperanza en medio de la oscuridad.' },
-  { id: 4, title: 'Hamnet', genre: 'Drama', year: 2024, rating: 'B', duration: '126 min', tag: 'En Cartelera', imageUrl: '/images/posters/ps4.jpg', description: 'Basada en la aclamada novela, esta película cuenta la historia del hijo de William Shakespeare y cómo su pérdida transformó la vida y obra del dramaturgo.' },
-  { id: 5, title: 'Arco', genre: 'Drama', year: 2024, rating: 'A', duration: '88 min', tag: 'Estreno', imageUrl: '/images/posters/ps5.jpg', description: 'Un íntimo drama familiar que sigue a una madre y su hijo mientras navegan por las complejidades del amor, la pérdida y la reconciliación.' },
-  { id: 6, title: 'Duna: Parte dos', genre: 'Ciencia ficción', year: 2024, rating: 'B15', duration: '166 min', tag: 'En Cartelera', imageUrl: '/images/posters/ps6.jpg', description: 'La continuación épica de la saga de Dune, donde Paul Atreides continúa su viaje para cumplir su destino y liberar a Arrakis de sus opresores.' },
-  { id: 7, title: 'La Cabra Que Cambió El Juego Goat', genre: 'Comedia', year: 2024, rating: 'TBC', duration: '100 min', tag: 'Muy Pronto', imageUrl: '/images/posters/ps7.jpg', description: 'Una comedia deportiva sobre una cabra que accidentalmente se convierte en la mascota de un equipo de fútbol y cambia su suerte para siempre.' },
-  { id: 8, title: 'Pecadores', genre: 'Drama', year: 2024, rating: 'B15', duration: '137 min', tag: 'Estreno', imageUrl: '/images/posters/ps8.jpg', description: 'Un intenso drama psicológico que explora los límites entre el bien y el mal, la redención y la condena en un mundo moralmente ambiguo.' },
-  { id: 9, title: 'Valor Sentimental', genre: 'Drama', year: 2024, rating: 'B', duration: '135 min', tag: 'En Cartelera', imageUrl: '/images/posters/ps9.jpg', description: 'Una historia conmovedora sobre cómo los objetos que guardamos pueden contener recuerdos poderosos y cómo estos definen quiénes somos.' },
-  { id: 10, title: 'El Sonido De La Muerte', genre: 'Terror', year: 2024, rating: 'C', duration: '101 min', tag: 'Estreno', imageUrl: '/images/posters/ps10.jpg', description: 'Un thriller de terror psicológico donde los sonidos del pasado regresan para atormentar a quienes intentan escapar de sus secretos más oscuros.' },
-];
-
 const PANTALLA = { INICIO: 'inicio', ALIMENTOS: 'alimentos', PROMOS: 'promos', COMPRA: 'compra' };
 
+/**
+ * 🔄 FLUJO REACT: Evento → Estado → Re-renderizado
+ * 
+ * Este componente demuestra el ciclo de vida de React:
+ * 
+ * 1. EVENTO: El usuario interactúa con la UI (onClick, onChange, onSubmit)
+ * 2. HANDLER: Se ejecuta una función handler que actualiza el estado con setState
+ * 3. RE-RENDER: React detecta el cambio de estado y re-renderiza automáticamente
+ * 4. UI ACTUALIZADA: La interfaz refleja el nuevo estado
+ * 
+ * Ejemplo práctico:
+ * - Usuario hace clic en "Comprar boletos" → onClick dispara setPantalla('compra')
+ * - React detecta cambio en 'pantalla' → re-renderiza mostrando el formulario
+ * - Usuario escribe en input → onChange actualiza formData → input muestra el valor
+ */
 function App() {
-  const [tabActivo, setTabActivo] = useState('cartelera');
-  const [pantalla, setPantalla] = useState(PANTALLA.INICIO);
-  const [favoritos, setFavoritos] = useState([]);
-  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
-  const [showConfirmacion, setShowConfirmacion] = useState(false);
-  const [compraData, setCompraData] = useState(null);
-  const [promociones, setPromociones] = useState([]);
-  const [loadingPromos, setLoadingPromos] = useState(false);
-  const [peliculasSeleccionadas, setPeliculasSeleccionadas] = useState([]);
+  // ========== ESTADOS CON useState ==========
+  // useState se utiliza para manejar el estado local del componente.
+  // Cada estado representa una pieza de información que puede cambiar y afectar el renderizado.
   
-  // Formulario de compra de boletos
+  const [tabActivo, setTabActivo] = useState('cartelera'); // Controla qué tab está visible (Cartelera/Horarios)
+  const [pantalla, setPantalla] = useState(PANTALLA.INICIO); // Controla qué pantalla mostrar (inicio/alimentos/promos/compra)
+  const [favoritos, setFavoritos] = useState([]); // Array de IDs de películas marcadas como favoritas
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null); // Película seleccionada para compra
+  const [showConfirmacion, setShowConfirmacion] = useState(false); // Controla visibilidad del modal de confirmación
+  const [compraData, setCompraData] = useState(null); // Datos de la compra realizada (para mostrar en resumen)
+  const [promociones, setPromociones] = useState([]); // Array de promociones cargadas dinámicamente desde API
+  const [loadingPromos, setLoadingPromos] = useState(false); // Estado de carga de promociones
+  const [errorPromos, setErrorPromos] = useState(null); // Mensaje de error si falla la carga de promociones
+  const [peliculasSeleccionadas, setPeliculasSeleccionadas] = useState([]); // Array de IDs de películas seleccionadas
+  const [peliculas, setPeliculas] = useState([]); // Array de películas cargadas desde JSON
+  const [loadingPeliculas, setLoadingPeliculas] = useState(true); // Estado de carga de películas
+  
+  // Formulario de compra de boletos - objeto de estado para manejar múltiples campos
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -43,9 +52,41 @@ function App() {
     horario: ''
   });
 
-  // Escuchar evento de compra de boletos desde MovieCard
+  // Estados para validación del formulario
+  const [errors, setErrors] = useState({});
+
+  // ========== useEffect PARA CARGAR PELÍCULAS DESDE JSON ==========
+  // useEffect se utiliza para ejecutar efectos secundarios (como cargar datos) cuando el componente se monta.
+  // El array de dependencias vacío [] asegura que solo se ejecute una vez al montar el componente.
+  useEffect(() => {
+    const cargarPeliculas = async () => {
+      setLoadingPeliculas(true);
+      try {
+        const response = await fetch('/data/peliculas.json');
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        setPeliculas(data);
+      } catch (error) {
+        console.error('Error al cargar películas:', error);
+        // Fallback: usar array vacío si falla la carga
+        setPeliculas([]);
+      } finally {
+        setLoadingPeliculas(false);
+      }
+    };
+
+    cargarPeliculas();
+  }, []);
+
+  // ========== useEffect PARA ESCUCHAR EVENTOS PERSONALIZADOS ==========
+  // CustomEvent se utiliza para comunicación entre componentes sin prop drilling.
+  // MovieCard dispara un evento 'comprarBoletos' que este componente escucha.
+  // El cleanup function (return) elimina el listener cuando el componente se desmonta para evitar memory leaks.
   useEffect(() => {
     const handleComprarBoletos = (e) => {
+      // 🔄 FLUJO: Evento → Buscar película → Actualizar estado → Re-render
       const pelicula = peliculas.find(p => p.id === e.detail.id);
       if (pelicula) {
         handleSeleccionarPeliculaParaCompra(pelicula);
@@ -53,16 +94,25 @@ function App() {
     };
 
     window.addEventListener('comprarBoletos', handleComprarBoletos);
+    // Cleanup: remover el listener al desmontar el componente
     return () => window.removeEventListener('comprarBoletos', handleComprarBoletos);
-  }, []);
+  }, [peliculas]); // Dependencia: peliculas debe estar disponible
 
-  // Consumo de datos dinámicos con fetch y useEffect
+  // ========== useEffect PARA CARGAR PROMOCIONES CON MANEJO DE ERRORES ==========
+  // useEffect se utiliza para consumir datos externos mediante fetch.
+  // Incluye manejo robusto de errores con estado de error y mensajes al usuario.
   useEffect(() => {
     const cargarPromociones = async () => {
       setLoadingPromos(true);
+      setErrorPromos(null); // Limpiar errores previos
       try {
         // Usando JSONPlaceholder como ejemplo de API pública
         const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+        
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status} - No se pudieron cargar las promociones`);
+        }
+        
         const data = await response.json();
         // Transformamos los datos de la API a formato de promociones
         const promosTransformadas = data.map((post, index) => ({
@@ -74,6 +124,8 @@ function App() {
         setPromociones(promosTransformadas);
       } catch (error) {
         console.error('Error al cargar promociones:', error);
+        // Estado de error para mostrar mensaje al usuario
+        setErrorPromos('No se pudieron cargar las promociones. Por favor, intenta más tarde.');
         // Fallback: usar datos locales si la API falla
         setPromociones([
           { id: 1, titulo: '2x1 en Martes', descripcion: 'Disfruta de 2x1 en boletos todos los martes del mes.', fecha: '2024-02-20' },
@@ -88,38 +140,109 @@ function App() {
     cargarPromociones();
   }, []);
 
-  // Manejar favoritos
+  // ========== HANDLERS - FLUJO: Evento → Estado → Re-render ==========
+
+  /**
+   * 🔄 FLUJO: onClick en favorito → handleToggleFavorite → setFavoritos → Re-render
+   * Maneja el toggle de favoritos usando inmutabilidad (no muta el array directamente).
+   */
   const handleToggleFavorite = (movieId) => {
     setFavoritos(prev => {
       if (prev.includes(movieId)) {
-        return prev.filter(id => id !== movieId);
+        return prev.filter(id => id !== movieId); // Remover: nuevo array sin el ID
       } else {
-        return [...prev, movieId];
+        return [...prev, movieId]; // Agregar: nuevo array con el ID agregado
       }
     });
+    // React detecta el cambio y re-renderiza MovieCard con el nuevo estado isFavorite
   };
 
-  // Manejar selección de película para compra
+  /**
+   * 🔄 FLUJO: CustomEvent 'comprarBoletos' → handleSeleccionarPeliculaParaCompra → Actualiza múltiples estados → Re-render
+   * Actualiza el estado de película seleccionada y cambia la pantalla a compra.
+   */
   const handleSeleccionarPeliculaParaCompra = (pelicula) => {
-    setPeliculaSeleccionada(pelicula);
-    setFormData(prev => ({ ...prev, pelicula: pelicula.title }));
-    setPantalla(PANTALLA.COMPRA);
+    setPeliculaSeleccionada(pelicula); // Estado: película seleccionada
+    setFormData(prev => ({ ...prev, pelicula: pelicula.title })); // Estado: pre-llenar formulario
+    setPantalla(PANTALLA.COMPRA); // Estado: cambiar pantalla → React re-renderiza mostrando formulario
   };
 
-  // Manejar cambios en el formulario (onChange)
+  /**
+   * 🔄 FLUJO: onChange en input → handleInputChange → setFormData → Re-render del input
+   * Maneja cambios en el formulario controlado, actualizando el estado en tiempo real.
+   */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value // Actualiza solo el campo específico usando spread operator
     }));
+    // React re-renderiza el input con el nuevo valor (formulario controlado)
+    
+    // Limpiar error del campo cuando el usuario empieza a escribir
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
-  // Manejar envío del formulario (onSubmit)
+  /**
+   * Validación del formulario
+   * Valida email con regex y cantidad mínima antes de enviar.
+   */
+  const validarFormulario = () => {
+    const nuevosErrores = {};
+    
+    // Validación de email con regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      nuevosErrores.email = 'Por favor ingresa un email válido';
+    }
+    
+    // Validación de cantidad mínima
+    const cantidad = parseInt(formData.cantidad, 10);
+    if (!cantidad || cantidad < 1) {
+      nuevosErrores.cantidad = 'La cantidad debe ser al menos 1';
+    }
+    if (cantidad > 10) {
+      nuevosErrores.cantidad = 'La cantidad máxima es 10';
+    }
+    
+    // Validación de campos requeridos
+    if (!formData.nombre.trim()) {
+      nuevosErrores.nombre = 'El nombre es requerido';
+    }
+    if (!formData.pelicula) {
+      nuevosErrores.pelicula = 'Debes seleccionar una película';
+    }
+    if (!formData.horario) {
+      nuevosErrores.horario = 'Debes seleccionar un horario';
+    }
+    
+    setErrors(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  };
+
+  /**
+   * 🔄 FLUJO: onSubmit → preventDefault → validar → setCompraData → setShowConfirmacion → Re-render con modal
+   * Maneja el envío del formulario con validación y muestra confirmación.
+   */
   const handleSubmitCompra = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Previene el comportamiento por defecto del formulario (recarga de página)
+    
+    // Validar antes de enviar
+    if (!validarFormulario()) {
+      return; // Detener el envío si hay errores
+    }
+    
+    // Actualizar estados: compraData y showConfirmacion
     setCompraData(formData);
     setShowConfirmacion(true);
+    // React re-renderiza mostrando el modal de confirmación
+    
     // Resetear formulario después de un momento
     setTimeout(() => {
       setFormData({
@@ -129,23 +252,32 @@ function App() {
         pelicula: '',
         horario: ''
       });
+      setErrors({}); // Limpiar errores
     }, 3000);
   };
 
+  /**
+   * 🔄 FLUJO: onClick en cerrar → cerrarConfirmacion → Actualiza estados → Re-render sin modal
+   * Cierra el modal de confirmación y regresa a la pantalla inicial.
+   */
   const cerrarConfirmacion = () => {
-    setShowConfirmacion(false);
-    setPantalla(PANTALLA.INICIO);
+    setShowConfirmacion(false); // Estado: ocultar modal
+    setPantalla(PANTALLA.INICIO); // Estado: cambiar pantalla → React re-renderiza mostrando inicio
   };
 
-  // Manejar selección activa de películas
+  /**
+   * 🔄 FLUJO: onClick en seleccionar → handleSeleccionarPelicula → setPeliculasSeleccionadas → Re-render con estado visual
+   * Maneja la selección múltiple de películas para acciones en lote.
+   */
   const handleSeleccionarPelicula = (peliculaId) => {
     setPeliculasSeleccionadas(prev => {
       if (prev.includes(peliculaId)) {
-        return prev.filter(id => id !== peliculaId);
+        return prev.filter(id => id !== peliculaId); // Remover selección
       } else {
-        return [...prev, peliculaId];
+        return [...prev, peliculaId]; // Agregar selección
       }
     });
+    // React re-renderiza MovieCard con el nuevo estado isSelected
   };
 
   return (
@@ -210,48 +342,70 @@ function App() {
                   </div>
                 )}
                 <section className="movie-grid-cinepolis">
-                  {peliculas.map((p) => (
-                    <MovieCard
-                      key={p.id}
-                      id={p.id}
-                      title={p.title}
-                      genre={p.genre}
-                      year={p.year}
-                      rating={p.rating}
-                      duration={p.duration}
-                      tag={p.tag}
-                      imageUrl={p.imageUrl}
-                      description={p.description}
-                      isFavorite={favoritos.includes(p.id)}
-                      onToggleFavorite={handleToggleFavorite}
-                      isSelected={peliculasSeleccionadas.includes(p.id)}
-                      onSelect={handleSeleccionarPelicula}
-                    />
-                  ))}
+                  {loadingPeliculas ? (
+                    <p style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem' }}>
+                      Cargando películas...
+                    </p>
+                  ) : peliculas.length === 0 ? (
+                    <p style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem' }}>
+                      No hay películas disponibles en este momento.
+                    </p>
+                  ) : (
+                    peliculas.map((p) => (
+                      <MovieCard
+                        key={p.id}
+                        id={p.id}
+                        title={p.title}
+                        genre={p.genre}
+                        year={p.year}
+                        rating={p.rating}
+                        duration={p.duration}
+                        tag={p.tag}
+                        imageUrl={p.imageUrl}
+                        description={p.description}
+                        isFavorite={favoritos.includes(p.id)}
+                        onToggleFavorite={handleToggleFavorite}
+                        isSelected={peliculasSeleccionadas.includes(p.id)}
+                        onSelect={handleSeleccionarPelicula}
+                      />
+                    ))
+                  )}
                 </section>
               </>
             )}
             {tabActivo === 'horarios' && (
               <div className="horarios-section">
                 <p className="horarios-placeholder">Selecciona un cine para ver horarios.</p>
-                {promociones.length > 0 && (
-                  <div className="promociones-dinamicas">
-                    <h3 className="promociones-title">Promociones Disponibles</h3>
-                    {loadingPromos ? (
-                      <p>Cargando promociones...</p>
-                    ) : (
-                      <div className="promociones-grid">
-                        {promociones.map(promo => (
-                          <div key={promo.id} className="promocion-card">
-                            <h4>{promo.titulo}</h4>
-                            <p>{promo.descripcion}</p>
-                            <span className="promocion-fecha">{promo.fecha}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div className="promociones-dinamicas">
+                  <h3 className="promociones-title">Promociones Disponibles</h3>
+                  {loadingPromos ? (
+                    <p>Cargando promociones...</p>
+                  ) : errorPromos ? (
+                    <div className="error-mensaje" style={{ 
+                      padding: '1rem', 
+                      background: '#fee2e2', 
+                      color: '#991b1b', 
+                      borderRadius: '8px',
+                      marginBottom: '1rem'
+                    }}>
+                      <strong>Error:</strong> {errorPromos}
+                      <p style={{ marginTop: '0.5rem', fontSize: '0.9rem' }}>
+                        Se están mostrando promociones locales como respaldo.
+                      </p>
+                    </div>
+                  ) : null}
+                  {promociones.length > 0 && (
+                    <div className="promociones-grid">
+                      {promociones.map(promo => (
+                        <div key={promo.id} className="promocion-card">
+                          <h4>{promo.titulo}</h4>
+                          <p>{promo.descripcion}</p>
+                          <span className="promocion-fecha">{promo.fecha}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </main>
@@ -282,7 +436,17 @@ function App() {
                   onChange={handleInputChange}
                   required
                   placeholder="Ingresa tu nombre"
+                  className={errors.nombre ? 'input-error' : ''}
                 />
+                {errors.nombre && (
+                  <span className="error-mensaje-campo" style={{ 
+                    color: '#dc2626', 
+                    fontSize: '0.875rem', 
+                    marginTop: '0.25rem' 
+                  }}>
+                    {errors.nombre}
+                  </span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="email">Correo electrónico</label>
@@ -294,7 +458,17 @@ function App() {
                   onChange={handleInputChange}
                   required
                   placeholder="tu@email.com"
+                  className={errors.email ? 'input-error' : ''}
                 />
+                {errors.email && (
+                  <span className="error-mensaje-campo" style={{ 
+                    color: '#dc2626', 
+                    fontSize: '0.875rem', 
+                    marginTop: '0.25rem' 
+                  }}>
+                    {errors.email}
+                  </span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="pelicula">Película</label>
@@ -304,12 +478,22 @@ function App() {
                   value={formData.pelicula}
                   onChange={handleInputChange}
                   required
+                  className={errors.pelicula ? 'input-error' : ''}
                 >
                   <option value="">Selecciona una película</option>
                   {peliculas.map(p => (
                     <option key={p.id} value={p.title}>{p.title}</option>
                   ))}
                 </select>
+                {errors.pelicula && (
+                  <span className="error-mensaje-campo" style={{ 
+                    color: '#dc2626', 
+                    fontSize: '0.875rem', 
+                    marginTop: '0.25rem' 
+                  }}>
+                    {errors.pelicula}
+                  </span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="cantidad">Cantidad de boletos</label>
@@ -322,7 +506,17 @@ function App() {
                   min="1"
                   max="10"
                   required
+                  className={errors.cantidad ? 'input-error' : ''}
                 />
+                {errors.cantidad && (
+                  <span className="error-mensaje-campo" style={{ 
+                    color: '#dc2626', 
+                    fontSize: '0.875rem', 
+                    marginTop: '0.25rem' 
+                  }}>
+                    {errors.cantidad}
+                  </span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="horario">Horario</label>
@@ -332,6 +526,7 @@ function App() {
                   value={formData.horario}
                   onChange={handleInputChange}
                   required
+                  className={errors.horario ? 'input-error' : ''}
                 >
                   <option value="">Selecciona un horario</option>
                   <option value="12:00">12:00 PM</option>
@@ -339,6 +534,15 @@ function App() {
                   <option value="18:00">6:00 PM</option>
                   <option value="21:00">9:00 PM</option>
                 </select>
+                {errors.horario && (
+                  <span className="error-mensaje-campo" style={{ 
+                    color: '#dc2626', 
+                    fontSize: '0.875rem', 
+                    marginTop: '0.25rem' 
+                  }}>
+                    {errors.horario}
+                  </span>
+                )}
               </div>
               <div className="form-actions">
                 <Button label="Comprar Boletos" variant="primary" />

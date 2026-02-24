@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
 
+/**
+ * MovieCard - Componente reutilizable para mostrar información de una película
+ * 
+ * PROPS: Las props permiten pasar datos y funciones desde el componente padre (App).
+ * - Props de datos: id, title, genre, etc. → información a mostrar
+ * - Props de callbacks: onToggleFavorite, onSelect → funciones para comunicar cambios al padre
+ * - Props de estado: isFavorite, isSelected → estado visual controlado por el padre
+ * 
+ * Este componente es reutilizable: se puede usar múltiples veces con diferentes props.
+ */
 function MovieCard({ 
   id, 
   title, 
@@ -16,6 +26,8 @@ function MovieCard({
   isSelected = false,
   onSelect
 }) {
+  // useState local para manejar el estado de visibilidad de la descripción
+  // Este estado es interno al componente y no afecta al padre
   const [showDescription, setShowDescription] = useState(false);
 
   const handleVerSinopsis = () => {
@@ -80,6 +92,8 @@ function MovieCard({
       </div>
       <div className="movie-actions">
         <Button label="Ver detalles" onClick={handleVerSinopsis} />
+        {/* CustomEvent se utiliza para comunicación entre componentes sin prop drilling.
+            El evento 'comprarBoletos' es escuchado por App.jsx mediante useEffect */}
         <Button label="Comprar boletos" onClick={() => window.dispatchEvent(new CustomEvent('comprarBoletos', { detail: { id, title } }))} />
         {onSelect && (
           <button

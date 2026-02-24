@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "El Día Del Fin Del Mundo: Migración",
+    "genre": "Ciencia ficción",
+    "year": 2024,
+    "rating": "B",
+    "duration": "98 min",
+    "tag": "Estreno",
+    "imageUrl": "/images/posters/ps1.jpg",
+    "description": "Una épica aventura sobre la migración masiva de animales que deben encontrar un nuevo hogar mientras enfrentan peligros inimaginables en su viaje."
+  },
+  {
+    "id": 2,
+    "title": "¡Ayuda!",
+    "genre": "Comedia",
+    "year": 2024,
+    "rating": "B15",
+    "duration": "113 min",
+    "tag": "En Cartelera",
+    "imageUrl": "/images/posters/ps2.jpg",
+    "description": "Una comedia hilarante sobre un grupo de amigos que se encuentran en situaciones cada vez más absurdas mientras intentan ayudar a un compañero en apuros."
+  },
+  {
+    "id": 3,
+    "title": "Aún Es De Noche En Caracas",
+    "genre": "Drama",
+    "year": 2024,
+    "rating": "B15",
+    "duration": "96 min",
+    "tag": "En Cartelera",
+    "imageUrl": "/images/posters/ps3.jpg",
+    "description": "Un conmovedor drama que explora la vida nocturna en Caracas, mostrando las historias de personas que buscan esperanza en medio de la oscuridad."
+  },
+  {
+    "id": 4,
+    "title": "Hamnet",
+    "genre": "Drama",
+    "year": 2024,
+    "rating": "B",
+    "duration": "126 min",
+    "tag": "En Cartelera",
+    "imageUrl": "/images/posters/ps4.jpg",
+    "description": "Basada en la aclamada novela, esta película cuenta la historia del hijo de William Shakespeare y cómo su pérdida transformó la vida y obra del dramaturgo."
+  },
+  {
+    "id": 5,
+    "title": "Arco",
+    "genre": "Drama",
+    "year": 2024,
+    "rating": "A",
+    "duration": "88 min",
+    "tag": "Estreno",
+    "imageUrl": "/images/posters/ps5.jpg",
+    "description": "Un íntimo drama familiar que sigue a una madre y su hijo mientras navegan por las complejidades del amor, la pérdida y la reconciliación."
+  },
+  {
+    "id": 6,
+    "title": "Duna: Parte dos",
+    "genre": "Ciencia ficción",
+    "year": 2024,
+    "rating": "B15",
+    "duration": "166 min",
+    "tag": "En Cartelera",
+    "imageUrl": "/images/posters/ps6.jpg",
+    "description": "La continuación épica de la saga de Dune, donde Paul Atreides continúa su viaje para cumplir su destino y liberar a Arrakis de sus opresores."
+  },
+  {
+    "id": 7,
+    "title": "La Cabra Que Cambió El Juego Goat",
+    "genre": "Comedia",
+    "year": 2024,
+    "rating": "TBC",
+    "duration": "100 min",
+    "tag": "Muy Pronto",
+    "imageUrl": "/images/posters/ps7.jpg",
+    "description": "Una comedia deportiva sobre una cabra que accidentalmente se convierte en la mascota de un equipo de fútbol y cambia su suerte para siempre."
+  },
+  {
+    "id": 8,
+    "title": "Pecadores",
+    "genre": "Drama",
+    "year": 2024,
+    "rating": "B15",
+    "duration": "137 min",
+    "tag": "Estreno",
+    "imageUrl": "/images/posters/ps8.jpg",
+    "description": "Un intenso drama psicológico que explora los límites entre el bien y el mal, la redención y la condena en un mundo moralmente ambiguo."
+  },
+  {
+    "id": 9,
+    "title": "Valor Sentimental",
+    "genre": "Drama",
+    "year": 2024,
+    "rating": "B",
+    "duration": "135 min",
+    "tag": "En Cartelera",
+    "imageUrl": "/images/posters/ps9.jpg",
+    "description": "Una historia conmovedora sobre cómo los objetos que guardamos pueden contener recuerdos poderosos y cómo estos definen quiénes somos."
+  },
+  {
+    "id": 10,
+    "title": "El Sonido De La Muerte",
+    "genre": "Terror",
+    "year": 2024,
+    "rating": "C",
+    "duration": "101 min",
+    "tag": "Estreno",
+    "imageUrl": "/images/posters/ps10.jpg",
+    "description": "Un thriller de terror psicológico donde los sonidos del pasado regresan para atormentar a quienes intentan escapar de sus secretos más oscuros."
+  }
+]
