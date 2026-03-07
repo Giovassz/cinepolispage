@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from './Button.jsx';
 
 /**
@@ -11,14 +12,14 @@ import Button from './Button.jsx';
  * 
  * Este componente es reutilizable: se puede usar múltiples veces con diferentes props.
  */
-function MovieCard({ 
-  id, 
-  title, 
-  genre, 
-  year, 
-  rating = 'B', 
-  duration = '98 min', 
-  tag = 'En Cartelera', 
+function MovieCard({
+  id,
+  title,
+  genre,
+  year,
+  rating = 'B',
+  duration = '98 min',
+  tag = 'En Cartelera',
   imageUrl,
   description,
   isFavorite = false,
@@ -65,7 +66,7 @@ function MovieCard({
           aria-label={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill={isFavorite ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
       </div>
@@ -83,17 +84,17 @@ function MovieCard({
         </div>
       )}
       <div className="movie-tags">
-        <span className={`tag ${
-          tag === 'Estreno' ? 'tag-estreno' :
-          tag === 'Muy Pronto' ? 'tag-pronto' : 'tag-cartelera'
-        }`}>
+        <span className={`tag ${tag === 'Estreno' ? 'tag-estreno' :
+            tag === 'Muy Pronto' ? 'tag-pronto' : 'tag-cartelera'
+          }`}>
           {tag}
         </span>
       </div>
       <div className="movie-actions">
-        <Button label="Ver detalles" onClick={handleVerSinopsis} />
-        {/* CustomEvent se utiliza para comunicación entre componentes sin prop drilling.
-            El evento 'comprarBoletos' es escuchado por App.jsx mediante useEffect */}
+        {/* Link navega a la ruta dinámica /pelicula/:id sin recargar la página */}
+        <Link to={`/pelicula/${id}`} className="btn-cinepolis btn-secondary" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
+          Ver detalles
+        </Link>
         <Button label="Comprar boletos" onClick={() => window.dispatchEvent(new CustomEvent('comprarBoletos', { detail: { id, title } }))} />
         {onSelect && (
           <button
