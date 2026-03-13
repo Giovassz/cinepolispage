@@ -188,33 +188,33 @@ a {
   overflow: hidden;
 }
 
-.hero-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+/* Override Swiper Navigation Arrows */
+.hero-carousel .swiper-button-prev,
+.hero-carousel .swiper-button-next {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background: rgba(13, 33, 55, 0.8);
-  border: none;
   color: #fff;
-  cursor: pointer;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: background 0.2s;
 }
 
-.hero-arrow:hover {
+.hero-carousel .swiper-button-prev:hover,
+.hero-carousel .swiper-button-next:hover {
   background: rgba(13, 33, 55, 1);
 }
 
-.hero-arrow-left {
+.hero-carousel .swiper-button-prev::after,
+.hero-carousel .swiper-button-next::after {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.hero-carousel .swiper-button-prev {
   left: 1rem;
 }
 
-.hero-arrow-right {
+.hero-carousel .swiper-button-next {
   right: 1rem;
 }
 
@@ -290,32 +290,22 @@ a {
   line-height: 1.5;
 }
 
-.hero-indicators {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-  z-index: 2;
-}
-
-.hero-dot {
+/* Override Swiper Pagination Dots */
+.hero-carousel .swiper-pagination-bullet {
   width: 32px;
   height: 4px;
-  border: none;
   background: rgba(255, 255, 255, 0.4);
   border-radius: 2px;
-  cursor: pointer;
-  padding: 0;
+  opacity: 1;
   transition: background 0.2s;
+  margin: 0 4px !important;
 }
 
-.hero-dot:hover {
+.hero-carousel .swiper-pagination-bullet:hover {
   background: rgba(255, 255, 255, 0.7);
 }
 
-.hero-dot-active {
+.hero-carousel .swiper-pagination-bullet-active {
   background: #2563eb;
 }
 
@@ -745,13 +735,17 @@ a {
     font-size: 1.35rem;
   }
 
-  .hero-arrow {
+  .hero-carousel .swiper-button-prev,
+  .hero-carousel .swiper-button-next {
     width: 40px;
     height: 40px;
+  }
+
+  .hero-carousel .swiper-button-prev {
     left: 0.5rem;
   }
 
-  .hero-arrow-right {
+  .hero-carousel .swiper-button-next {
     right: 0.5rem;
   }
 

@@ -86,6 +86,12 @@ function Header() {
           <NavLink to="/comprar" className={getNavClass} onClick={closeNav}>
             Boletos
           </NavLink>
+          <NavLink to="/sobre-nosotros" className={getNavClass} onClick={closeNav}>
+            Nosotros
+          </NavLink>
+          <NavLink to="/servicios" className={getNavClass} onClick={closeNav}>
+            Servicios
+          </NavLink>
         </nav>
 
         <div className="header-actions">

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Footer() {
   return (
     <footer className="footer-cinepolis">
@@ -23,8 +25,9 @@ function Footer() {
         </div>
         <div className="footer-col">
           <h4>¿Quiénes somos?</h4>
+          <Link to="/sobre-nosotros">Sobre Nosotros</Link>
           <a href="#">Próximas Aperturas</a>
-          <a href="#">Ventas Corporativas</a>
+          <Link to="/servicios">Servicios / Corporativos</Link>
           <a href="#">Proveedores</a>
           <a href="#">Cinépolis Jobs</a>
         </div>

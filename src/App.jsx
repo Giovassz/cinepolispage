@@ -9,6 +9,8 @@ import AlimentosPage from './pages/AlimentosPage.jsx';
 import OtrosPage from './pages/OtrosPage.jsx';
 import PeliculaDetallePage from './pages/PeliculaDetallePage.jsx';
 import CompraBoletoPage from './pages/CompraBoletoPage.jsx';
+import SobreNosotrosPage from './pages/SobreNosotrosPage.jsx';
+import ServiciosPage from './pages/ServiciosPage.jsx';
 
 /**
  * App.jsx - Ahora actúa como el layout raíz + configuración de rutas.
@@ -44,6 +46,9 @@ function App() {
         <Route path="/pelicula/:id" element={<PeliculaDetallePage />} />
         {/* Página adicional: Compra de boletos con soporte para query params */}
         <Route path="/comprar" element={<CompraBoletoPage />} />
+        {/* Páginas informativas */}
+        <Route path="/sobre-nosotros" element={<SobreNosotrosPage />} />
+        <Route path="/servicios" element={<ServiciosPage />} />
         {/* 404 Catch-all */}
         <Route path="*" element={<PaginaNoEncontrada />} />
       </Routes>
